@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer</title>
+    <style>
+        /* Style to make image fit within the viewport */
+        img {
+            width: 100%;   /* Adjust width to be 100% of the viewport */
+            height: 100vh; /* Adjust height to be 100% of the viewport height */
+            object-fit: contain; /* Ensure the image is scaled properly without distortion */
+        }
+        /* Style to center the buttons below the image */
+        .button-container {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <img id="imgViewer" src="https://i2.pixnif.com/events/136920/images/folders/588933/images/190A4515.JPG?w=1600&v=1716070673">
+    <div class="button-container">
+        <button onclick="changeImage(-1)">Previous</button>
+        <button onclick="changeImage(1)">Next</button>
+    </div>
+    <script>
+        var currentImage = 4515; // Initialize this to the current image number without the 'A'
+        function changeImage(direction) {
+            currentImage += direction;
+            // Format the new image URL including 'A' and adjusting the number accordingly
+            var imageUrl = "https://i2.pixnif.com/events/136920/images/folders/588933/images/190A" + currentImage + ".JPG?w=1600&v=1716070673";
+            document.getElementById('imgViewer').src = imageUrl;
+        }
+
+        // Adding keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "ArrowRight") {
+                changeImage(1); // Next image on right arrow key
+            } else if (event.key === "ArrowLeft") {
+                changeImage(-1); // Previous image on left arrow key
+            }
+        });
+    </script>
+</body>
+</html>
